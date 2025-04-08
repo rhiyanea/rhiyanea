@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hirono Theme</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Georgia', serif;
+            background-color: #f5f1e6;
+            color: #3e3e3e;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            flex-direction: column;
+            text-align: center;
+            padding: 20px;
+            position: relative;
+            overflow-x: hidden;
+            background: linear-gradient(45deg, #f5f1e6, #e0c28d);
+            animation: gradientAnimation 5s ease-in-out infinite;
+        }
+        h1 {
+            font-size: 3rem;
+            color: #4a3627;
+            margin-bottom: 1rem;
+            position: relative;
+            z-index: 1;
+        }
+        p {
+            font-size: 1.2rem;
+            color: #6a5646;
+            margin-bottom: 2rem;
+            line-height: 1.6;
+            position: relative;
+            z-index: 1;
+        }
+        .social {
+            font-weight: bold;
+            transition: color 0.3s;
+            position: relative;
+            z-index: 1;
+        }
+        .social:hover {
+            color: #d4a24d;
+        }
+
+        @keyframes gradientAnimation {
+            0% { background: linear-gradient(45deg, #f5f1e6, #e0c28d); }
+            50% { background: linear-gradient(45deg, #e0c28d, #f5f1e6); }
+            100% { background: linear-gradient(45deg, #f5f1e6, #e0c28d); }
+        }
+
+        .cursor {
+            position: absolute;
+            background-color: #e0c28d;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            pointer-events: none;
+            transform: translate(-50%, -50%);
+            transition: all 0.2s ease;
+            z-index: 9999;
+        }
+
+        .quote {
+            font-style: italic;
+            color: #4a3627;
+            margin-top: 30px;
+            animation: fadeIn 5s ease-in-out;
+        }
+
+        @keyframes fadeIn {
+            0% { opacity: 0; }
+            100% { opacity: 1; }
+        }
+
+        /* Scroll animation */
+        .scroll-animate {
+            opacity: 0;
+            transform: translateY(50px);
+            transition: opacity 0.5s, transform 0.5s;
+        }
+
+        .scroll-animate.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Image styling */
+        .hirono-portrait {
+            width: 200px; /* Adjust the size as needed */
+            height: auto;
+            border-radius: 50%;
+            margin-top: 2rem;
+            border: 4px solid #4a3627;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+        }
+        .hirono-portrait:hover {
+            transform: scale(1.1);
+        }
+    </style>
+</head>
+<body>
+
+    <h1>"The Lamplighter" Hirono</h1>
+
+    <!-- Portrait Image -->
+    <img src="hirono.jpg" alt="Hirono Portrait" class="hirono-portrait">
+
+    <p class="scroll-animate">The Lamplighter is a character from *Le Petit Prince*, symbolizing dedication and guidance. <br>
+    I gave you this Hirono because to us, you have this undying dedication to teach us young people the things we need to know about life. 
+    <br> Just like this Hirono, you've been constantly guiding us through the right path without making us feel invalidated or degraded. 
+    <br>
+    <br> Bossing Jerald, I hope that every time you see this Hirono, you'd be reminded of how much you mean to us, the batch 2023-2024 of B. Gates. 
+    <br> I hope that every time you see this figurine, you don't just see a cute creation but instead, you see yourself. <br> 
+    <br> On the times that you feel tired and unnoticed, I hope you look at this gift. Just like the lamp this little figure holds—you are warm, steady, and inspiring.</p>
+
+    <div class="quote">
+        From Rhiane, former B. Gates student
+    </div>
+
+    <div class="cursor"></div>
+
+    <script>
+        // Custom cursor
+        document.addEventListener('mousemove', (e) => {
+            const cursor = document.querySelector('.cursor');
+            cursor.style.left = `${e.pageX}px`;
+            cursor.style.top = `${e.pageY}px`;
+        });
+
+        // Scroll animation trigger
+        const scrollElements = document.querySelectorAll('.scroll-animate');
+        const isElementInView = (el) => {
+            const rect = el.getBoundingClientRect();
+            return (rect.top >= 0 && rect.bottom <= window.innerHeight);
+        }
+
+        const checkScrollAnimations = () => {
+            scrollElements.forEach(el => {
+                if (isElementInView(el)) {
+                    el.classList.add('visible');
+                }
+            });
+        }
+
+        window.addEventListener('scroll', checkScrollAnimations);
+        window.addEventListener('load', checkScrollAnimations);
+    </script>
+
+</body>
+</html>
